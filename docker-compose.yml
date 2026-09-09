@@ -1,0 +1,20 @@
+services:
+  mcpforwork-hub:
+    build:
+      context: .
+      dockerfile: hub/Dockerfile
+    container_name: mcpforwork-hub
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+      AGENT_TOKEN: "${AGENT_TOKEN}"
+      MCP_PATH_TOKEN: "${MCP_PATH_TOKEN}"
+    mem_limit: 384m
+    cpus: "0.50"
+    networks:
+      - mobilechat
+
+networks:
+  mobilechat:
+    external: true
+    name: mobilechatserver_mobilechat
